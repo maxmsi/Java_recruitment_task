@@ -8,22 +8,23 @@ public class Wall implements Structure {
 
     private List<Block> blocks ;
 
+    public Wall(CompositeBlock blocks) {
+        this.blocks = blocks.getBlocks();
+    }
+
     @Override
     public Optional<Block> findBlockByColor(String color) {
-        Optional<Block> blockByColor = Optional.ofNullable(blocks.stream()
-                .filter(e -> e.getColor().equals(color))
+        return Optional.ofNullable(blocks.stream()
+                .filter(block -> block.getColor().equals(color))
                 .findAny()
                 .orElse(null));
-
-        return blockByColor;
     }
 
     @Override
     public List<Block> findBlocksByMaterial(String material) {
-        List<Block> blocksByMaterial = blocks.stream()
-                .filter(e->e.getMaterial().equals(material))
+       return blocks.stream()
+                .filter(block-> block.getMaterial().equals(material))
                 .collect(Collectors.toList());
-        return blocksByMaterial;
     }
 
     @Override
